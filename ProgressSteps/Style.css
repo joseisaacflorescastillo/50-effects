@@ -1,17 +1,17 @@
-@import url("https://fonts.googleapis.com/css?family=Multi&display=swap");
-
-* {
-  box-sizing: border-box;
-}
+@import url("https://fonts.googleapis.com/css?family=Muli&display=swap");
 
 :root {
   --line-border-fill: #3498db;
   --line-border-empty: #e0e0e0;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: #f6f7fb;
-  font-family: "Multi", sans-serif;
+  font-family: "Muli", sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,11 +50,11 @@ body {
   position: absolute;
   top: 50%;
   left: 0;
-  transform: translate(-50%);
+  transform: translateY(-50%);
   height: 4px;
   width: 0%;
   z-index: -1;
-  transform: 0.4s ease;
+  transition: 0.4s ease;
 }
 
 .circle {
@@ -87,14 +87,14 @@ body {
 }
 
 .btn:active {
-    transform: scale(0.98);
+  transform: scale(0.98);
 }
 
 .btn:focus {
-    outline: 0;
+  outline: 0;
 }
 
-.btn:disabled{
-    background-color: var(--line-border-empty);
-    cursor: not-allowed;
+.btn:disabled {
+  background-color: var(--line-border-empty);
+  cursor: not-allowed;
 }
