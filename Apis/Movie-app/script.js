@@ -40,9 +40,9 @@ function showMovies(movies) {
 }
 
 function getClassByRate(vote) {
-    if(vote >= 8) {
+    if (vote >= 8) {
         return 'green'
-    } else if(vote >= 5) {
+    } else if (vote >= 5) {
         return 'orange'
     } else {
         return 'red'
@@ -54,7 +54,7 @@ form.addEventListener('submit', (e) => {
 
     const searchTerm = search.value
 
-    if(searchTerm && searchTerm !== '') {
+    if (searchTerm && searchTerm !== '') {
         getMovies(SEARCH_API + searchTerm)
 
         search.value = ''
