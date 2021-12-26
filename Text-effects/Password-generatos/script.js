@@ -1,6 +1,6 @@
 const resultEl = document.getElementById('result')
 const lenghtEl = document.getElementById('length')
-const uppercaseEl = document.getElementById('uppsercase')
+const uppercaseEl = document.getElementById('uppercase')
 const lowercaseEl = document.getElementById('lowercase')
 const numbersEl = document.getElementById('numbers')
 const symbolsEl = document.getElementById('symbols')
@@ -10,9 +10,25 @@ const clipboardEl = document.getElementById('clipboard')
 const randomFunc = {
     lower: getRandomLower,
     upper: getRandomUpper,
-    Symbol: getRandomSymbol,
-    number: getRandomNumber
+    number: getRandomNumber,
+    symbol: getRandomSymbol
 }
+
+clipboardEl.addEventListener('click', () => {
+    const textarea = document.createElement('textarea')
+    const password = resultEl.innerHTML
+
+    if (!password) {
+        return
+    }
+
+    textarea.value = password
+    document.body.appendChild(textarea)
+    textarea.select()
+    document.execCommand('copy')
+    textarea.remove()
+    alert('Password copied to clipboard!')
+})
 
 generateEl.addEventListener('click', () => {
     const length = +lenghtEl.value
@@ -21,7 +37,28 @@ generateEl.addEventListener('click', () => {
     const hasNumber = numbersEl.checked
     const hasSymbol = symbolsEl.checked
 
+    resultEl.innerHTML = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length)
 })
+
+function generatePassword(lower, upper, number, symbol, length) {
+    let generatedPassword = ''
+    const typesCount = lower + upper + number + symbol
+    const typesArr = [{ lower }, { upper }, { number }, { symbol }].filter(item => Object.values(item)[0])
+
+    if (typesCount === 0) {
+        return ''
+    }
+
+    for (let i = 0; i < length; i += typesCount) {
+        typesArr.forEach(type => {
+            const funcName = Object.keys(type)[0]
+            generatedPassword += randomFunc[funcName]()
+        })
+    }
+    const finalPassword = generatedPassword.slice(0, length)
+
+    return finalPassword
+}
 
 function getRandomLower() {
     return String.fromCharCode(Math.random() * 26 + 97)
